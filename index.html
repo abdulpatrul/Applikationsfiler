@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ätbajs</title>
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./fancybox/jquery.fancybox-1.3.1.css" media="screen" />
+<script type="text/javascript"> 
+
+function Check(){	// function declaratioon 
+alert("hej och välkommen till shervin bildgalleri. bajs och kiss ?"); 
+} 
+
+Check();	// function call 
+
+function myConfirmation() {
+    return 'alla hatar denna idiot rutan, därför tog jag med den :D';
+}
+
+window.onbeforeunload = myConfirmation;
+</script> 
+</head>
+<body>
+    <h1>Shervins bild galleri</h1>
+	
+    <div id="content">
+        <div class="gallery-wrap">
+            <div class="gallery clearfix">
+                <div class="gallery__item">
+                    <a href="images/image1-big.jpg" class="gallery__link">
+                        <img src="images/image1.jpg" class="gallery__img" alt="" />
+                    </a>
+                </div>
+                 <div class="gallery__item">
+                    <a href="images/image2-big.jpg" class="gallery__link">
+                        <img src="images/image2.jpg" class="gallery__img" alt="" />
+                    </a>
+                </div>
+                <div class="gallery__item">
+                    <a href="images/image3-big.jpg" class="gallery__link">
+                        <img src="images/image3.jpg" class="gallery__img" alt="" />
+                    </a>
+                </div>
+                <div class="gallery__item">
+                    <a href="images/image4-big.jpg" class="gallery__link">
+                        <img src="images/image4.jpg" class="gallery__img" alt="" />
+                    </a>
+                </div>
+                <div class="gallery__item">
+                    <a href="images/image1-big.jpg" class="gallery__link">
+                        <img src="images/image1.jpg" class="gallery__img" alt="" />
+                    </a>
+                </div>
+                <div class="gallery__item">
+                    <a href="images/image2-big.jpg" class="gallery__link">
+                        <img src="images/image2.jpg" class="gallery__img" alt="" />
+                    </a>
+                </div>
+                <div class="gallery__item">
+                    <a href="images/image3-big.jpg" class="gallery__link">
+                        <img src="images/image3.jpg" class="gallery__img" alt="" />
+                    </a>
+                </div>
+                <div class="gallery__item">
+                    <a href="images/image4-big.jpg" class="gallery__link">
+                        <img src="images/image4.jpg" class="gallery__img" alt="" />
+                    </a>
+                </div>
+                <div class="gallery__item">
+                    <a href="images/image1-big.jpg" class="gallery__link">
+                        <img src="images/image1.jpg" class="gallery__img" alt="" />
+                    </a>
+                </div>
+                <div class="gallery__item">
+                    <a href="images/image2-big.jpg" class="gallery__link">
+                        <img src="images/image2.jpg" class="gallery__img" alt="" />
+                    </a>
+                </div>
+                <div class="gallery__item">
+                    <a href="images/image3-big.jpg" class="gallery__link">
+                        <img src="images/image3.jpg" class="gallery__img" alt="" />
+                    </a>
+                </div>
+            </div> <!-- .gallery -->
+            <div class="gallery__controls clearfix">
+                <div href="#" class="gallery__controls-prev">
+                    <img src="images/prev.png" alt="" />
+                </div>
+                <div href="#" class="gallery__controls-next">
+                    <img src="images/next.png" alt="" />
+                </div>
+            </div> <!-- .gallery__controls -->
+        </div> <!-- .gallery-wrap -->
+    </div> <!-- #content -->
+
+<div id="top_form">
+	<form id="item_form">
+		<p>
+			<label for="first_name">First name: </label>
+			<input id="first_name" type="text" name="first_name" />
+		</p>
+		<p>
+			<label for="last_name">Last name: </label>
+			<input id="last_name" type="text" name="last_name" />
+		</p>
+		<p>
+			<label for="age">Age: </label>
+			<input id="age" type="number" name="age" />
+		</p>
+		<p>
+			<label for="profession">Profession: </label>
+			<input id="profession" type="text" name="profession" />
+		</p>
+		<a id="add_item" href="#">Add</a>
+	</form>
+</div>
+
+<div id="list_of_items">
+</div>
+    <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+    $(window).load(function(){
+	
+        var totalWidth = 0;
+
+       
+        $(".gallery__item").each(function(){
+            totalWidth = totalWidth + $(this).outerWidth(true);
+        });
+
+       
+        var maxScrollPosition = totalWidth - $(".gallery-wrap").outerWidth();
+
+        function toGalleryItem($targetItem){
+            
+            if($targetItem.length){
+
+               
+                var newPosition = $targetItem.position().left;
+
+                if(newPosition <= maxScrollPosition){
+
+                   
+                    $targetItem.addClass("gallery__item--active");
+
+                    
+                    $targetItem.siblings().removeClass("gallery__item--active");
+
+
+                    $(".gallery").animate({
+                        left : - newPosition
+                    });
+                } else {
+                   
+                    $(".gallery").animate({
+                        left : - maxScrollPosition
+                    });
+                };
+            };
+        };
+
+        
+        $(".gallery").width(totalWidth);
+
+      
+        $(".gallery__item:first").addClass("gallery__item--active");
+
+       
+        $(".gallery__controls-prev").click(function(){
+           
+            var $targetItem = $(".gallery__item--active").prev();
+            toGalleryItem($targetItem);
+        });
+
+       
+        $(".gallery__controls-next").click(function(){
+           
+            var $targetItem = $(".gallery__item--active").next();
+            toGalleryItem($targetItem);
+        });
+    });
+    </script>
+	<script src="script.js"></script>
+    <script type="text/javascript" src="./fancybox/jquery.fancybox-1.3.1.js"></script>
+    <script type="text/javascript">
+   
+    $(document).ready(function(){
+        $(".gallery__link").fancybox({
+            'titleShow'     : false,
+            'transitionIn'  : 'elastic',
+            'transitionOut' : 'elastic'
+        });
+    });
+    </script>
+	
+</body>
+</html>
